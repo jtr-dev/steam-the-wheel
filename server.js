@@ -79,7 +79,7 @@ function getSteamGames(profile, id) {
   return rp(options)
     .then(function(response) {
       // console.log(response)
-      return parser.toJson(response)
+      return parser.parser(response)
     })
     .catch(function(err) {
       console.log(err)

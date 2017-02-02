@@ -44,7 +44,7 @@ var vm = new Vue({
             }, 3500)
         },
         randomGame: function() {
-                var spin = this.steamgames[0].gamesList.games.game.map(s => (s.name))
+                var spin = this.steamgames[0].gameslist.games.game.map(s => (s.name))
                     // console.log(spin)
                 this.SteamGame = spin[Math.floor(Math.random() * spin.length)].toString()
                 console.log(this.SteamGame);
@@ -54,14 +54,15 @@ var vm = new Vue({
 });
 socket.on('steamGames', function(json) {
     vm.steamgames = [];
-
-    if (json.fulfillmentValue.length > 0) {
-        vm.LoadingLabel = true
-    }
-    else {
-        vm.LoadingLabel = false
-    }
-
-    var steamLib = JSON.parse(json.fulfillmentValue)
+    // if (json.fulfillmentValue.length > 0) {
+    //     vm.LoadingLabel = true
+    // }
+    // else {
+    //     vm.LoadingLabel = false
+    // }
+    var steamLib = json.fulfillmentValue
+    setTimeout(()=>{
+        (steamLib.gameslist)? vm.LoadingLabel = true : vm.LoadingLabel = false
+    }, 600)
     vm.steamgames.push(steamLib);
 })

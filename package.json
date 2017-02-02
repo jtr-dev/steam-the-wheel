@@ -13,7 +13,7 @@
     "express": "~3.2.4",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
-    "socket.io": "~0.9.14",
+    "socket.io": "1.7.2",
     "simple-xml2json": "1.2.3"
   }
 }
