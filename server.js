@@ -1,32 +1,15 @@
-//
-// # SimpleServer
-//
-// A simple chat server using Socket.IO, Express, and Async.
-//
-var http = require('http')
-var path = require('path')
-  // var request = require('request') ///zac killed this
+const http = require('http')
+const path = require('path')
 const rp = require('request-promise')
 
-var async = require('async')
-var socketio = require('socket.io')
-var express = require('express')
-var parser = require('simple-xml2json')
+const async = require('async')
+const socketio = require('socket.io')
+const express = require('express')
+const parser = require('simple-xml2json')
 
-
-// var steamgames;
-
-//
-// ## SimpleServer `SimpleServer(obj)`
-//
-// Creates a new instance of SimpleServer with the following options:
-//  * `port` - The HTTP port to listen on. If `process.env.PORT` is set, _it overrides this value_.
-//
-
-
-var router = express()
-var server = http.createServer(router)
-var io = socketio.listen(server)
+const router = express()
+const server = http.createServer(router)
+const io = socketio.listen(server)
 
 router.use(express.static(path.resolve(__dirname, 'client')))
 var messages = []
@@ -43,24 +26,6 @@ io.on('connection', function(socket) {
     }, 3500);
   })
 })
-
-function updateRoster() {
-  async.map(
-    sockets,
-    function(socket, callback) {
-      socket.get('name', callback)
-    },
-    function(err, names) {
-      broadcast('roster', names)
-    }
-  )
-}
-
-function broadcast(event, data) {
-  sockets.forEach(function(socket) {
-    socket.emit(event, data)
-  })
-}
 
 function getSteamGames(profile, id) {
   // http://steamcommunity.com/profiles/76561197985405022/games?tab=all&xml=1
