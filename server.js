@@ -11,7 +11,7 @@ const rp = require('request-promise')
 var async = require('async')
 var socketio = require('socket.io')
 var express = require('express')
-var parser = require('xml2json')
+var parser = require('simple-xml2json')
 
 
 // var steamgames;
